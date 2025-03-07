@@ -13,13 +13,13 @@ export interface Project {
 const db = new Dexie('ReadyForProdDatabase') as Dexie & {
     projects: EntityTable<
         Project,
-        'guid' // primary key "id" (for the typings only)
+        'guid' // primary key "guid" (for the typings only)
     >;
 };
 
 // Schema declaration:
 db.version(1).stores({
-    projects: 'guid, name, type, created, lastModified' // primary key "id" (for the runtime!)
+    projects: 'guid, name, type, created, lastModified' // primary key "guid" (for the runtime!)
 });
 
 export { db };
