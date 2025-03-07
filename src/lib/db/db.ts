@@ -3,7 +3,7 @@ import Dexie, { type EntityTable } from 'dexie';
 export type ProjectType = 'sales' | 'website' | 'other';
 
 export interface Project {
-    id: number;
+    guid: string;
     name: string;
     type: ProjectType;
     created: Date;
@@ -13,13 +13,13 @@ export interface Project {
 const db = new Dexie('ReadyForProdDatabase') as Dexie & {
     projects: EntityTable<
         Project,
-        'id' // primary key "id" (for the typings only)
+        'guid' // primary key "id" (for the typings only)
     >;
 };
 
 // Schema declaration:
 db.version(1).stores({
-    projects: '++id, name, type, created, lastModified' // primary key "id" (for the runtime!)
+    projects: 'guid, name, type, created, lastModified' // primary key "id" (for the runtime!)
 });
 
 export { db };
